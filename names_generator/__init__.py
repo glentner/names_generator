@@ -82,7 +82,7 @@ def generate_name(style: str = 'underscore', seed: int = None) -> str:
 # Command-line interface implementation
 PROGRAM = 'generate_name'
 USAGE = f"""\
-usage: {PROGRAM} [-h] [-v] [-S NAME]
+usage: {PROGRAM} [-h] [-v] [--style NAME]
 Generate random name pairing.\
 """
 
