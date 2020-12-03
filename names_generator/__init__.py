@@ -30,7 +30,7 @@ from cmdkit.cli import Interface
 
 # In the interest of keeping with the original implementation :)
 restricted_names: List[Tuple[str, str]] = [
-    ('boring', 'wozniak')
+    ('boring', 'wozniak')  # Steve Wozniak is not boring.
 ]
 
 

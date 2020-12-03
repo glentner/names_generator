@@ -11,7 +11,7 @@
 """Metadata for names_generator package."""
 
 
-__version__   = '0.0.2'
+__version__   = '0.0.3'
 __authors__   = 'Geoffrey Lentner'
 __contact__   = 'glentner@purdue.edu'
 __license__   = 'Apache License'
