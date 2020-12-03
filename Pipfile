@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+names-generator = {editable = true, path = "."}
+
+[dev-packages]
+pytest = "6.1.2"
+pytest-cov = "2.10.1"
+hypothesis = "5.41.4"
+ipython = "7.19.0"
+twine = "3.2.0"
+
+[requires]
+python_version = "3.8.6"
