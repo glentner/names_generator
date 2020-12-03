@@ -27,8 +27,13 @@ Installation
 
 |
 
-Examples
---------
+Usage
+-----
+
+|
+
+Python API
+^^^^^^^^^^
 
 |
 
@@ -43,7 +48,7 @@ The API only really consists of a single function.
 |
 
 Customize the formatting of the name by specifying a `style`,
-One of `plain`, `capital`, `hyphen`, or `underscore` (default).
+one of `plain`, `capital`, `hyphen`, or `underscore` (default).
 
 .. code-block:: python
 
@@ -58,6 +63,11 @@ Pin a seed value for the underlying PRNG to reproduce a given name.
 
     >>> generate_name(seed=42) == generate_name(seed=42)
     True
+
+|
+
+Command-line
+^^^^^^^^^^^^
 
 |
 
