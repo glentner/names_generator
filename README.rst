@@ -32,20 +32,53 @@ Examples
 
 |
 
+The API only really consists of a single function.
+
 .. code-block:: python
 
     >>> from names_generator import generate_name
     >>> generate_name()
     'vigorous_goldstine'
 
+|
+
+Customize the formatting of the name by specifying a `style`,
+One of `plain`, `capital`, `hyphen`, or `underscore` (default).
 
 .. code-block:: python
 
     >>> generate_name(style='capital')
     'Hardcore Thompson'
 
+|
+
+Pin a seed value for the underlying PRNG to reproduce a given name.
 
 .. code-block:: python
 
     >>> generate_name(seed=42) == generate_name(seed=42)
     True
+
+|
+
+The package also exposes a basic command-line interface for scripting outside of Python
+
+.. code-block:: bash
+
+    $ generate_name
+    clever_matsumoto
+
+    $ generate_name --style=capital
+    Heuristic Einstein
+
+    $ generate_name --help
+    usage: generate_name [-h] [-v] [--style NAME]
+    Generate random name pairing.
+
+    options:
+    -s, --style    NAME    Formatting (default: underscore).
+    -h, --help             Show this message and exit.
+    -v, --version          Show the version and exit.
+
+    Documentation and issue tracking at:
+    https://github.com/glentner/names_generator
