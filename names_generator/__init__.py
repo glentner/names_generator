@@ -103,10 +103,6 @@ options:
 """
 
 
-# CmdKit prints messages using standard logging interfaces
-logging.basicConfig(format='%(msg)s')
-
-
 class NamesGeneratorApp(Application):
     """Top-level application class for `generate_name` console application."""
 
@@ -126,4 +122,5 @@ class NamesGeneratorApp(Application):
 
 def main() -> int:
     """Entry-point for `generate_name` console application."""
+    logging.basicConfig(format='%(msg)s')
     return NamesGeneratorApp.main(sys.argv[1:])
