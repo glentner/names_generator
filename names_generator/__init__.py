@@ -20,8 +20,8 @@ import random
 import logging
 
 # internal libs
-from .__meta__ import __version__, __description__, __authors__, __contact__
-from . import names
+from names_generator.__meta__ import __version__, __description__, __authors__, __contact__
+from names_generator import names
 
 # external libs
 from cmdkit.app import Application
