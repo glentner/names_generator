@@ -51,5 +51,5 @@ setup(
                         'Programming Language :: Python :: 3.12',
                         'Programming Language :: Python :: 3.13'],
     entry_points     = {'console_scripts': [f'generate_name=names_generator:main']},
-    install_requires = ['cmdkit>=2.1.2', ]
+    install_requires = ['cmdkit>=2.7.4', ]
 )
