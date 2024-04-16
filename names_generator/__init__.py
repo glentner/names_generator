@@ -20,8 +20,8 @@ import random
 import logging
 
 # internal libs
-from .__meta__ import __version__, __description__, __authors__, __contact__
-from . import names
+from names_generator.__meta__ import __version__, __description__, __authors__, __contact__
+from names_generator import names
 
 # external libs
 from cmdkit.app import Application
@@ -82,8 +82,9 @@ def generate_name(style: str = 'underscore', seed: int = None) -> str:
 # Command-line interface implementation
 PROGRAM = 'generate_name'
 USAGE = f"""\
-usage: {PROGRAM} [-h] [-v] [--style NAME]
-Generate random name pairing.\
+Usage: 
+  {PROGRAM} [-h] [-v] [--style NAME]
+  Generate random name pairing.\
 """
 
 EPILOG = f"""\
@@ -94,10 +95,10 @@ https://github.com/glentner/names_generator\
 HELP = f"""\
 {USAGE}
 
-options:
--s, --style    NAME    Formatting (default: underscore).
--h, --help             Show this message and exit.
--v, --version          Show the version and exit.
+Options:
+  -s, --style    NAME    Formatting (default: underscore).
+  -h, --help             Show this message and exit.
+  -v, --version          Show the version and exit.
 
 {EPILOG}\
 """

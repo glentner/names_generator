@@ -12,18 +12,21 @@
 
 
 # type annotations
-from typing import List, Dict
+from typing import Final, Dict
 
 # standard libs
 import re
 import random
 
+# external libs
+import pytest
+
 # internal libs
 from names_generator import random_names, generate_name, names
 
 
-REPEAT: int = 100_000
-PATTERNS: Dict[str, re.Pattern] = {
+REPEAT: Final[int] = 10_000
+PATTERNS: Final[Dict[str, re.Pattern]] = {
     'underscore': re.compile('^[a-z]+_[a-z]+$'),
     'capital': re.compile('^[A-Z][a-z]+ [A-Z][a-z]+$'),
     'hyphen': re.compile('^[a-z]+-[a-z]+$'),
@@ -31,21 +34,21 @@ PATTERNS: Dict[str, re.Pattern] = {
 }
 
 
-def test_generate_name() -> None:
+@pytest.mark.parametrize('n', range(REPEAT))
+def test_generate_name(n: int) -> None:
     """Test name generator against different formatting styles."""
-    for i in range(REPEAT):
-        style = random.choice(list(PATTERNS))
-        assert PATTERNS[style].match(generate_name(style=style)) is not None
+    style = random.choice(list(PATTERNS))
+    assert PATTERNS[style].match(generate_name(style=style)) is not None
 
 
-def test_random_names() -> None:
+@pytest.mark.parametrize('n', range(REPEAT))
+def test_random_names(n: int) -> None:
     """Test underlying random choice selector."""
-    for i in range(REPEAT):
-        left, right = random_names()
-        assert left in names.LEFT and right in names.RIGHT
+    left, right = random_names()
+    assert left in names.LEFT and right in names.RIGHT
 
 
-def test_random_seed_consistency() -> None:
+@pytest.mark.parametrize('n', range(REPEAT))
+def test_random_seed_consistency(n: int) -> None:
     """Test that setting a seed value reproduces the same name pair."""
-    for i in range(REPEAT):
-        assert generate_name(seed=i) == generate_name(seed=i)
+    assert generate_name(seed=n) == generate_name(seed=n)

@@ -7,11 +7,10 @@ name = "pypi"
 names-generator = {editable = true, path = "."}
 
 [dev-packages]
-pytest = "6.1.2"
-pytest-cov = "2.10.1"
-hypothesis = "5.41.4"
-ipython = "7.19.0"
-twine = "3.2.0"
+pytest = "*"
+pytest-cov = "*"
+ipython = "*"
+twine = "*"
 
 [requires]
-python_version = "3.8.6"
+python_version = "3.12"
