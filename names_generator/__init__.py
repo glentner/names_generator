@@ -12,7 +12,7 @@
 
 
 # type annotations
-from typing import Tuple, List, Dict, Callable
+from typing import Tuple, List, Dict, Callable, Optional
 
 # standard libs
 import sys
@@ -72,7 +72,7 @@ def format_names(pair: Tuple[str, str], style: str = 'underscore') -> str:
         raise NotImplementedError(f'No style \'{style}\'') from error
 
 
-def generate_name(style: str = 'underscore', seed: int = None) -> str:
+def generate_name(style: str = 'underscore', seed: Optional[int] = None) -> str:
     """Generate a random name."""
     if seed is not None:
         random.seed(seed)
