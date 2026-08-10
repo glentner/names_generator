@@ -2,9 +2,9 @@ name: tests
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
   pull_request:
-    branches: [main, develop]
+    branches: [main]
 
 # Read-only by default; nothing in this workflow needs to write to the repository.
 permissions:

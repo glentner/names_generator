@@ -146,6 +146,13 @@ This project uses `uv <https://docs.astral.sh/uv>`_.
 
 |
 
+``main`` is the only long-lived branch. Work happens on a branch taken from
+``main`` and returns to it by pull request; ``main`` is protected and requires
+the test suite to pass, so it is never committed to directly. A release is a
+tag on ``main``, which is what triggers publication to PyPI.
+
+|
+
 Upstream
 --------
 
