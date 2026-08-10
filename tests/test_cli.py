@@ -17,12 +17,13 @@ from __future__ import annotations
 # standard libs
 import re
 import sys
+from importlib.metadata import entry_points
 
 # external libs
 import pytest
 
 # internal libs
-from names_generator import NamesGeneratorApp, HELP, main
+from names_generator import NamesGeneratorApp, PROGRAM, HELP, main
 from names_generator.__meta__ import __version__
 
 
@@ -57,6 +58,23 @@ def test_version_option(capsys: pytest.CaptureFixture) -> None:
 
 def test_entrypoint(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture) -> None:
     """Test the console-script entry-point against `sys.argv`."""
-    monkeypatch.setattr(sys, 'argv', ['generate_name', '--style', 'hyphen'])
+    monkeypatch.setattr(sys, 'argv', [PROGRAM, '--style', 'hyphen'])
     assert main() == 0
     assert re.match('^[a-z]+-[a-z]+$', capsys.readouterr().out.strip()) is not None
+
+
+@pytest.mark.parametrize('command', ['names-generator', 'generate_name'])
+def test_console_scripts_are_installed(command: str) -> None:
+    """Test that both the canonical command and its legacy alias are installed.
+
+    `names-generator` matches the distribution name, which is what lets `uvx
+    names-generator` work; `generate_name` is kept for backwards compatibility.
+    """
+    scripts = {entry.name: entry.value for entry in entry_points(group='console_scripts')}
+    assert scripts.get(command) == 'names_generator:main'
+
+
+def test_program_names_itself_after_the_distribution() -> None:
+    """Test that usage text advertises the canonical command."""
+    assert PROGRAM == 'names-generator'
+    assert HELP.splitlines()[1].strip().startswith(PROGRAM)

@@ -42,6 +42,8 @@ Issues = "https://github.com/glentner/names_generator/issues"
 Changelog = "https://github.com/glentner/names_generator/releases"
 
 [project.scripts]
+names-generator = "names_generator:main"
+# Retained for backwards compatibility; `names-generator` is the canonical name.
 generate_name = "names_generator:main"
 
 [dependency-groups]
