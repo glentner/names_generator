@@ -73,6 +73,10 @@ jobs:
         run: |
           results="${{ join(needs.*.result, ' ') }}"
           echo "upstream job results: ${results}"
+          if [ -z "${results}" ]; then
+            echo "::error::no upstream job results; refusing to pass vacuously"
+            exit 1
+          fi
           for result in ${results}; do
             if [ "${result}" != "success" ]; then
               echo "::error::a required job reported '${result}'"
