@@ -12,7 +12,8 @@
 
 
 # type annotations
-from typing import Tuple, List, Dict, Callable, Optional
+from __future__ import annotations
+from typing import Tuple, Dict, FrozenSet, Callable, Optional
 
 # standard libs
 import sys
@@ -20,7 +21,7 @@ import random
 import logging
 
 # internal libs
-from names_generator.__meta__ import __version__, __description__, __authors__, __contact__
+from names_generator.__meta__ import __version__
 from names_generator import names
 
 # external libs
@@ -28,16 +29,22 @@ from cmdkit.app import Application
 from cmdkit.cli import Interface
 
 
+__all__ = ['random_names', 'format_names', 'generate_name', 'main', 'names', ]
+
+
 # In the interest of keeping with the original implementation :)
-restricted_names: List[Tuple[str, str]] = [
-    ('boring', 'wozniak')  # Steve Wozniak is not boring.
-]
+restricted_names: FrozenSet[Tuple[str, str]] = frozenset({
+    ('boring', 'wozniak'),  # Steve Wozniak is not boring.
+})
 
 
-def random_names() -> Tuple[str, str]:
+def random_names(rng: Optional[random.Random] = None) -> Tuple[str, str]:
     """Select a random choice of names from `names.LEFT` and `names.RIGHT`."""
-    _names = random.choice(names.LEFT), random.choice(names.RIGHT)
-    return _names if _names not in restricted_names else random_names()
+    choice = random.choice if rng is None else rng.choice
+    while True:
+        pair = choice(names.LEFT), choice(names.RIGHT)
+        if pair not in restricted_names:
+            return pair
 
 
 def _format_plain(pair: Tuple[str, str]) -> str:
@@ -74,15 +81,16 @@ def format_names(pair: Tuple[str, str], style: str = 'underscore') -> str:
 
 def generate_name(style: str = 'underscore', seed: Optional[int] = None) -> str:
     """Generate a random name."""
-    if seed is not None:
-        random.seed(seed)
-    return format_names(random_names(), style=style)
+    # NOTE: an explicit seed gets its own PRNG instance so that we never reach in
+    #       and disturb the global random state on behalf of the caller.
+    rng = None if seed is None else random.Random(seed)
+    return format_names(random_names(rng), style=style)
 
 
 # Command-line interface implementation
 PROGRAM = 'generate_name'
 USAGE = f"""\
-Usage: 
+Usage:
   {PROGRAM} [-h] [-v] [--style NAME]
   Generate random name pairing.\
 """

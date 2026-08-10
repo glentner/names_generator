@@ -8,10 +8,11 @@
 # You should have received a copy of the Apache License along with this program.
 # If not, see <https://www.apache.org/licenses/LICENSE-2.0>.
 
-"""Stub file for names.py"""
+"""Metadata for names_generator package."""
 
-#Type annotations in this file mirror the source file
-from typing import List
 
-LEFT: List[str]
-RIGHT: List[str]
+__version__     = '0.3.0'
+__authors__     = 'Geoffrey Lentner'
+__contact__     = 'glentner@purdue.edu'
+__license__     = 'Apache License'
+__description__ = 'Clone of the Moby/Docker random name generator as a Python package.'
