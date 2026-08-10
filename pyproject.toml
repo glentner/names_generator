@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "names_generator"
+description = "Clone of the Moby/Docker random name generator as a Python package."
+readme = "README.rst"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [
+    {name = "Geoffrey Lentner", email = "glentner@purdue.edu"},
+]
+maintainers = [
+    {name = "Geoffrey Lentner", email = "glentner@purdue.edu"},
+]
+keywords = ["random", "name", "generator", "docker", "moby"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Typing :: Typed",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "cmdkit>=2.7.4,<3.0.0",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/glentner/names_generator"
+Repository = "https://github.com/glentner/names_generator"
+Issues = "https://github.com/glentner/names_generator/issues"
+Changelog = "https://github.com/glentner/names_generator/releases"
+
+[project.scripts]
+generate_name = "names_generator:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[tool.hatch.version]
+path = "src/names_generator/__meta__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/names_generator"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.rst", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--strict-markers", "--strict-config"]
+
+[tool.coverage.run]
+source = ["names_generator"]
+branch = true
+
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING:"]
+show_missing = true
