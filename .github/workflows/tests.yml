@@ -60,3 +60,22 @@ jobs:
 
       - name: Check distribution metadata
         run: uvx twine check --strict dist/*
+
+  # Single aggregate check for branch protection to require. Gating on this rather
+  # than on individual matrix jobs means the matrix can change without anyone having
+  # to remember to update the protection rule.
+  tests-passed:
+    if: always()
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify every required job succeeded
+        run: |
+          results="${{ join(needs.*.result, ' ') }}"
+          echo "upstream job results: ${results}"
+          for result in ${results}; do
+            if [ "${result}" != "success" ]; then
+              echo "::error::a required job reported '${result}'"
+              exit 1
+            fi
+          done
