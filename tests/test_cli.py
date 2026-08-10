@@ -17,7 +17,7 @@ from __future__ import annotations
 # standard libs
 import re
 import sys
-from importlib.metadata import entry_points
+from importlib.metadata import distribution
 
 # external libs
 import pytest
@@ -70,7 +70,11 @@ def test_console_scripts_are_installed(command: str) -> None:
     `names-generator` matches the distribution name, which is what lets `uvx
     names-generator` work; `generate_name` is kept for backwards compatibility.
     """
-    scripts = {entry.name: entry.value for entry in entry_points(group='console_scripts')}
+    # NOTE: entry_points(group=...) is 3.10+; Distribution.entry_points works everywhere
+    #       we support, and scopes the check to this distribution rather than the env.
+    scripts = {entry.name: entry.value
+               for entry in distribution('names_generator').entry_points
+               if entry.group == 'console_scripts'}
     assert scripts.get(command) == 'names_generator:main'
 
 
