@@ -88,7 +88,9 @@ def generate_name(style: str = 'underscore', seed: Optional[int] = None) -> str:
 
 
 # Command-line interface implementation
-PROGRAM = 'generate_name'
+# NOTE: `generate_name` remains installed as an alias, but the program names itself
+#       after the distribution so that `uvx names-generator` and friends work.
+PROGRAM = 'names-generator'
 USAGE = f"""\
 Usage:
   {PROGRAM} [-h] [-v] [--style NAME]

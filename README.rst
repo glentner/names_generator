@@ -95,15 +95,15 @@ The package also exposes a basic command-line interface for scripting outside of
 
 .. code-block:: bash
 
-    $ generate_name
+    $ names-generator
     clever_matsumoto
 
-    $ generate_name --style=capital
+    $ names-generator --style=capital
     Heuristic Einstein
 
-    $ generate_name --help
+    $ names-generator --help
     Usage:
-      generate_name [-h] [-v] [--style NAME]
+      names-generator [-h] [-v] [--style NAME]
       Generate random name pairing.
 
     Options:
@@ -113,6 +113,22 @@ The package also exposes a basic command-line interface for scripting outside of
 
     Documentation and issue tracking at:
     https://github.com/glentner/names_generator
+
+|
+
+Because the command matches the distribution name, you can run it without
+installing anything:
+
+.. code-block:: bash
+
+    $ uvx names-generator
+    clever_matsumoto
+
+|
+
+The command was originally installed as ``generate_name``. That name is still
+installed and behaves identically, but ``names-generator`` is the canonical one
+and is what the documentation uses.
 
 |
 
