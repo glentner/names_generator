@@ -11,8 +11,8 @@
 """Metadata for names_generator package."""
 
 
-__version__   = '0.2.0'
-__authors__   = 'Geoffrey Lentner'
-__contact__   = 'glentner@purdue.edu'
-__license__   = 'Apache License'
+__version__     = '0.3.0'
+__authors__     = 'Geoffrey Lentner'
+__contact__     = 'glentner@purdue.edu'
+__license__     = 'Apache License'
 __description__ = 'Clone of the Moby/Docker random name generator as a Python package.'
